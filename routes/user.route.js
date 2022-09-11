@@ -15,6 +15,7 @@ router.get("/secret/:userId", requireSignin, isAuth, isAdmin, (req, res) => {
   });
 });
 
+// whenever userId is in route, userById method MIDDLEWARE RUNS and makes User available in the request
 router.param("userId", userById);
 
 module.exports = router;

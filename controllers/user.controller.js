@@ -8,6 +8,6 @@ exports.userById = (req, res, next, id) => {
       });
     }
     req.profile = user;
-    next(); //because this is middleware we have to use execute next for application to continue
+    next(); //because this is MIDDLEWARE we have to use execute next for application to continue
   });
 };

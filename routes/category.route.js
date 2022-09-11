@@ -1,7 +1,14 @@
 const express = require("express");
 const router = express.Router();
 
-const { create } = require("../controllers/category.controller");
+const {
+  create,
+  categoryById,
+  read,
+  update,
+  remove,
+  list,
+} = require("../controllers/category.controller");
 const {
   requireSignin,
   isAuth,
@@ -9,6 +16,7 @@ const {
 } = require("../controllers/auth.controller");
 const { userById } = require("../controllers/user.controller");
 
+router.get("/category/:categoryId", read);
 router.post(
   "/category/create/:userId",
   requireSignin,
@@ -16,7 +24,23 @@ router.post(
   isAdmin,
   create
 );
+router.put(
+  "/category/:categoryId/:userId",
+  requireSignin,
+  isAdmin,
+  isAdmin,
+  update
+);
+router.delete(
+  "/category/:categoryId/:userId",
+  requireSignin,
+  isAdmin,
+  isAdmin,
+  remove
+);
+router.get("/categories", list);
 
+router.param("categoryId", categoryById); //when Id in route, will run ById middleware
 router.param("userId", userById);
 
 module.exports = router;
